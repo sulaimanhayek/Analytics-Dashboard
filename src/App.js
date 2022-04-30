@@ -1,23 +1,21 @@
-import logo from './logo.svg';
+import React from "react";
+import { Header } from "semantic-ui-react";
+
+import DashboardGrid from "./components/DashboardGrid";
+import DashboardTable from "./components/DashboardTable";
+
 import './App.css';
 
 function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <Header as="h3">Analytics Dashboard connected with Postgres</Header>
       </header>
+      <div className="App-main">
+        <DashboardGrid />
+        <DashboardTable />
+      </div>     
     </div>
   );
 }
