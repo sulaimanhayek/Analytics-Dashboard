@@ -5,7 +5,7 @@ import "./DashboardTable.css";
 
 // get this URL from your project on Canonic
 const GET_PROJECTS_URL =
-    "https://postgres-dashboard-7fc.can.canonic.dev/api/projects";
+    "https://analytics-dashboard.can.canonic.dev/api/projects";
 
 function DashboardTable() {
     const [loading, setLoading] = React.useState(false);
