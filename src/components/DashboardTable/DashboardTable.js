@@ -1,20 +1,25 @@
 import React from "react";
-import { Table } from "semantic-ui-react";
-
+import axios from "axios";
+import { Table, Loader, Dimmer } from "semantic-ui-react";
 import "./DashboardTable.css";
 
-const TABLE_DATA = [
-    {
-        name: "Lorem Ipsum",
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
-        owner: "John Doe",
-        status: "in progress",
-    },
-];
+// get this URL from your project on Canonic
+const GET_PROJECTS_URL =
+    "https://postgres-dashboard-7fc.can.canonic.dev/api/projects";
 
 function DashboardTable() {
+    const [loading, setLoading] = React.useState(false);
+    const [projects, setProjects] = React.useState([]);
+
+    React.useEffect(()=>{
+        setLoading(true);
+        axios(GET_PROJECTS_URL).then(({data})=>{
+            setProjects(data.data || []);
+            setLoading(false);
+        });
+    },[])
     return (
-        <div className="dashboardTable">
+        <div className="dashboardTable-wrapper">
             <Table celled padded>
                 <Table.Header>
                     <Table.Row>
@@ -25,20 +30,12 @@ function DashboardTable() {
                     </Table.Row>
                 </Table.Header>
                 <Table.Body>
-                    {TABLE_DATA.map((item, i) => (
+                    {projects.map((item,i)=>(
                         <Table.Row>
-                            <Table.Cell>
-                                <div>{item.name}</div>
+                            <Table.Cell width={1}>
+                                <div>{item.users.name}</div>
                             </Table.Cell>
-                            <Table.Cell>
-                                <div>{item.description}</div>
-                            </Table.Cell>
-                            <Table.Cell>
-                                <div>{item.owner}</div>
-                            </Table.Cell>
-                            <Table.Cell>
-                                <div>{item.status}</div>
-                            </Table.Cell>
+                            
                         </Table.Row>
                     ))}
                 </Table.Body>
